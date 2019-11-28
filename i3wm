@@ -1,0 +1,24 @@
+
+
+
+# Set Fn Keys 
+
+
+# Pulse Audio controls (https://www.reddit.com/r/i3wm/comments/4piknb/multimedia_keyboard_shortcuts_using_fn_key_are/)
+# avaliable at page and.
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 1 -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 1 toggle # mute sound
+
+
+# Sreen brightness controls https://www.reddit.com/r/i3wm/comments/4piknb/multimedia_keyboard_shortcuts_using_fn_key_are/)
+# avaliable at page begin
+bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+
+# Wifi conection
+# requer instalação de networkmanager e nm-applet
+
+exec --no-startup-id nm-applet 
+# alternaticavemente pode digitar no terminal nmcli dev wifi e nmcli device wifi connect APname password
+

@@ -1,0 +1,11 @@
+# No touchscreen on Gnome Wayland
+# search the device with 'cat /proc/bus/input/devices'
+# make the file 80-touchscreen.rules on '/etc/udev/rules.d/80-touchscreen.rules'
+# content file
+
+SUBSYSTEM=="usb", ATTRS{idVendor}=="04f3", ATTR{authorized}="0"
+
+# save and reboot
+
+# alternative 
+# SUBSYSTEM=="usb", ATTRS{idVendor}=="your vendor id", ATTRS{idProduct}=="your product id", ATTR{authorized}="0"
