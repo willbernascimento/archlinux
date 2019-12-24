@@ -58,7 +58,7 @@ echo "127.0.0.1	localhost
 ::1		localhost
 127.0.1.1	${HOST_NAME}.localdomain	${HOST_NAME}" >> /etc/hosts
 
-SYSTEM_PACKAGES="grub efibootmgr sudo intel-ucode networkmanager dhcp dhcpcd"
+SYSTEM_PACKAGES="grub efibootmgr os-prober sudo intel-ucode networkmanager dhcp dhcpcd"
 
 # grub, firmware, sudo
 pacman -S ${SYSTEM_PACKAGES}
@@ -135,3 +135,5 @@ SYSTEM_SERVICES="NetworkManager dhcpcd"
 for i in SYSTEM_SERVICES; do
     systemctl enable "${i}.service"
 done
+
+systemctl enable fstrim.timer
