@@ -58,7 +58,7 @@ echo "127.0.0.1	localhost
 ::1		localhost
 127.0.1.1	${HOST_NAME}.localdomain	${HOST_NAME}" >> /etc/hosts
 
-SYSTEM_PACKAGES="grub efibootmgr os-prober sudo intel-ucode networkmanager dhcp dhcpcd"
+SYSTEM_PACKAGES="grub dosfstools efibootmgr os-prober sudo intel-ucode networkmanager dhcp dhcpcd"
 
 # grub, firmware, sudo
 pacman -S ${SYSTEM_PACKAGES}
@@ -82,8 +82,8 @@ then
         echo " "
         echo "Estou instalando em UEFI"
         echo " "
-        #grub-install --target=x86_64-efi --efi-directory=${BOOT_DEVICE} --bootloader-id=GRUB
-        #GRUB_GENERATE
+        grub-install --target=x86_64-efi --efi-directory=${BOOT_DEVICE} --bootloader-id=GRUB
+        GRUB_GENERATE
 else
         echo " "
         echo "Estou instalando em BIOS/MBR"
