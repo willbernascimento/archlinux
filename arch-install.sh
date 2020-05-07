@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 # DEVICE=/dev/sda
 # PARTITION_ROOT=/dev/sda3
 # PARTITION_BOOT=/dev/sda1
@@ -17,7 +16,21 @@ echo " "
 
 # pacstrap
 
-pacstrap /mnt base linux linux-firmware vim
+PACSTRAP_PKG="base linux linux-firmware vim"
+
+
+echo "Além dos pacotes: $PACSTRAP_PKG"
+read -p "Você gostaria de adicionar mais pacotes? (1) Sim e (2) Não. " PCSTRAP_TEST
+
+if [ $PCSTRAP_TEST -eq 2 ]
+then
+	echo "pacstrap /mnt $PACSTRAP_PKG"
+else 
+	read -p "Pacotes: " PACSTRAP_PKG_USR
+	echo "pacstrap /mnt $PACSTRAP_PKG $PACSTRAP_PKG_USR"
+fi
+
+# copy the installer2 for into chroot
 
 cp arch-install2.sh /mnt/arch-install2.sh
 chmod +x /mnt/arch-install2.sh
@@ -26,15 +39,18 @@ echo " "
 echo "=======  genfstab ========"
 echo " "
 
-# fstab - paticoes
+# fstab - creating the table os partitions
 
 genfstab -U /mnt >> /mnt/etc/fstab
 
-# chroot
+# chroot - into to the new enviroment 
 
 echo " "
 echo "======= Fazendo CHROOT ======\n"
 echo " "
+
+
+# run installer2 on chroot
 
 arch-chroot /mnt ./arch-install2.sh
 
