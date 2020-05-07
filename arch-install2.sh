@@ -174,7 +174,7 @@ echo " "
 
 SYSTEM_SERVICES="NetworkManager dhcpcd"
 
-for i in SYSTEM_SERVICES; do
+for i in $SYSTEM_SERVICES; do
     systemctl enable "${i}.service"
 done
 
