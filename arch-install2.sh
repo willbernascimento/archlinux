@@ -80,48 +80,48 @@ pacman -S ${SYSTEM_PACKAGES}
 mkinitcpio -p linux
 
 
-read -p "Você precisa escolher qual bootloader usar: (1) grub (bios/uefi) ou (2) systemd-boot (uefi). " BOOTLOADER  
+read -p "Você precisa escolher qual bootloader usar: (1) grub (bios/uefi) ou (2) systemd-boot (uefi). " BOOTLOADER
 
 # bootloader
 # GRUB BIOS
 
-
-if [ BOOTLOADER -eq 1 ]
-
 GRUB_GENERATE="grub-mkconfig -o /boot/grub/grub.cfg"
+
+if [ $BOOTLOADER == 1 ]
 
 then
 	read -p "Escolha o tipo de Boot: 1) UEFI 2) BIOS/MBR: " BOOT_OPTION
-	read -p "Indique o dispositivo ou partição de Boot no caso de UEFI: " BOOT_DEVICE
 
-	if [ ${BOOT_OPTION} -eq 1 ]
+	if [ $BOOT_OPTION == 2 ]
 	then
-        	echo " "
-        	echo "Estou instalando em UEFI"
-        	echo " "
-        	grub-install --target=x86_64-efi --efi-directory=${BOOT_DEVICE} --bootloader-id=GRUB
-        	GRUB_GENERATE
+		 read -p "Indique o dispositivo (/dev/sdX): " BOOT_DEVICE
+		 echo " "
+		 echo "Installing in BIOS/MBR mode, on the $BOOT_DEVICE device."
+        	 echo " "
+        	 grub-install ${BOOT_DEVICE}
+        	 ${GRUB_GENERATE}
 	else
-        	echo " "
-        	echo "Estou instalando em BIOS/MBR"
-        	echo " "
-        	grub-install ${BOOT_DEVICE}
-        	${GRUB_GENERATE}
+		 read -p "Indique a partição (/dev/sdxX): " BOOT_DEVICE
+        	 echo " "
+        	 echo "Installing in UEFI mode, on the $BOOT_DEVICE partition."
+        	 echo " "
+        	 grub-install --target=x86_64-efi --efi-directory=${BOOT_DEVICE} --bootloader-id=GRUB
+        	 ${GRUB_GENERATE}
 
 	fi
 
 else
 	read -p "Indique a partição de Boot (esp): " BOOT_DEVICE
 	read -p "Indique a partição root (ex: /dev/sdaX): " ROOT_DEVICE
-	
+
 	bootctl --path=$BOOT_DEVICE install
-	
+
 	echo "
 	default  arch.conf
 	timeout  4
 	console-mode max
 	editor   no " ${BOOT_DEVICE}/loader/loader.conf
-	
+
 	echo "
 	title   Arch Linux
 	linux   /vmlinuz-linux
