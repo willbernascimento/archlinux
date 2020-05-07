@@ -24,10 +24,10 @@ read -p "Você gostaria de adicionar mais pacotes? (1) Sim e (2) Não. " PCSTRAP
 
 if [ $PCSTRAP_TEST -eq 2 ]
 then
-	echo "pacstrap /mnt $PACSTRAP_PKG"
+	pacstrap /mnt $PACSTRAP_PKG
 else 
 	read -p "Pacotes: " PACSTRAP_PKG_USR
-	echo "pacstrap /mnt $PACSTRAP_PKG $PACSTRAP_PKG_USR"
+	pacstrap /mnt $PACSTRAP_PKG $PACSTRAP_PKG_USR
 fi
 
 # copy the installer2 for into chroot
