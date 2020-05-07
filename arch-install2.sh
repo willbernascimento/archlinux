@@ -101,7 +101,7 @@ then
         	 grub-install ${BOOT_DEVICE}
         	 ${GRUB_GENERATE}
 	else
-		 read -p "Indique a partição (/dev/sdxX): " BOOT_DEVICE
+		 read -p "Indique o ponto de montagem do boot (ESP) (/dev/sdxX): " BOOT_DEVICE
         	 echo " "
         	 echo "Installing in UEFI mode, on the $BOOT_DEVICE partition."
         	 echo " "
@@ -111,23 +111,17 @@ then
 	fi
 
 else
-	read -p "Indique a partição de Boot (esp): " BOOT_DEVICE
+	read -p "Indique o ponto de montagem do boot (ESP): " BOOT_DEVICE
 	read -p "Indique a partição root (ex: /dev/sdaX): " ROOT_DEVICE
 
 	bootctl --path=$BOOT_DEVICE install
 
-	echo "
-	default  arch.conf
-	timeout  4
-	console-mode max
-	editor   no " ${BOOT_DEVICE}/loader/loader.conf
 
-	echo "
-	title   Arch Linux
-	linux   /vmlinuz-linux
-	initrd  /intel-ucode.img
-	initrd  /initramfs-linux.img
-	options root= $ROOT_DEVICE rw" ${BOOT_DEVICE}/loader/entries/arch.conf
+	echo "default  arch.conf \ntimeout  4 \nconsole-mode max \neditor   no " >> ${BOOT_DEVICE}/loader/loader.conf
+
+	echo \
+	"title   Arch Linux	\nlinux   /vmlinuz-linux	\ninitrd  /intel-ucode.img	\ninitrd  /initramfs-linux.img	\noptions root= $ROOT_DEVICE rw" \
+	>> ${BOOT_DEVICE}/loader/entries/arch.conf
 fi
 
 
