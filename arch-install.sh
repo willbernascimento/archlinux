@@ -16,7 +16,7 @@ echo " "
 
 # pacstrap
 
-PACSTRAP_PKG="base linux linux-firmware vim"
+PACSTRAP_PKG="base base-devel linux linux-firmware vim"
 
 
 echo "Além dos pacotes: $PACSTRAP_PKG"
