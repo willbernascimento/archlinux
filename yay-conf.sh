@@ -1,3 +1,4 @@
+#!/bin/bash
 ## ------------------------------------------------------------------------- ##
 ## This script download, build and install yay on Arch Linux.
 ## 
