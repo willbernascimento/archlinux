@@ -6,15 +6,35 @@
 
 # Dowload part 2 script
 
+echo "Download script install files"
+
 curl -o arch-install2.sh https://raw.githubusercontent.com/willbernascimento/archlinux/master/arch-install2.sh
 
+
 # mirrorlist [download a local mirrorlist]
+
+echo "Editing mirrolist file"
 
 mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
 
 COUNTRY_CODE="BR"
 curl -o /etc/pacman.d/mirrorlist https://www.archlinux.org/mirrorlist/?country=${COUNTRY_CODE}&protocol=http&protocol=https&ip_version=4
 sed -i-${COUNTRY_CODE}.bak '/Server/s/^#//g' mirrorlist
+
+
+# optinal [reflector]
+
+#echo "we will use the reflect package to select the fastest mirrors at this point.\
+# It is possible that these mirrors will not be the fastest in the future, so we recommend \
+# that you check this mirrorlist sometime after installation."
+
+#mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
+
+#pacman -Syu reflector
+
+#reflector --verbose --latest 5 --sort rate --save /etc/pacman.d/mirrorlist
+
+
 
 echo " "
 echo "=======  pacstrap ========"
