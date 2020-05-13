@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DESKTOP="gnome gnome-tweaks git"
+DESKTOP="gnome gnome-tweaks git neofetch"
 
 TERM_CONF="zsh zsh-autosuggestions zsh-completions vim zsh-syntax-highlighting zsh-history-substring-search zsh-theme-powerlevel10k"
 
@@ -13,22 +13,15 @@ INTERNET="firefox firefox-i18n-pt-br telegram-desktop"
 
 pacman -Syu $DESKTOP
 
-$SYSTEMD_SERVICES="gdm"
+SYSTEMD_SERVICES="gdm"
 
 for i in $SYSTEMD_SERVICES; do
-    systemctl enable "${i}.service"
+    systemctl enable "${i}"
 done
 
 # Install other pacman packages
 
-pacman -Syu $PROGRAMING $INTERNET $PROGRAMMING
-
-# Enable AUR with YAY
-#git clone https://aur.archlinux.org/yay.git
-#cd yay/
-#makepkg -s --noconfirm --install
-
-
+pacman -Syu $INTERNET $PROGRAMMING
 
 
 
