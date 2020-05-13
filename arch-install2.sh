@@ -120,7 +120,11 @@ else
 	echo "default  arch.conf \ntimeout  4 \nconsole-mode max \neditor   no " >> ${BOOT_DEVICE}/loader/loader.conf
 
 	echo \
-	"title   Arch Linux	\nlinux   /vmlinuz-linux	\ninitrd  /intel-ucode.img	\ninitrd  /initramfs-linux.img	\noptions root= $ROOT_DEVICE rw" \
+	"title   Arch Linux	
+linux   /vmlinuz-linux	
+initrd  /intel-ucode.img	
+initrd  /initramfs-linux.img	
+options root=$ROOT_DEVICE rw" \
 	>> ${BOOT_DEVICE}/loader/entries/arch.conf
 fi
 
