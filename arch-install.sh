@@ -8,7 +8,13 @@
 
 curl -o arch-install2.sh https://raw.githubusercontent.com/willbernascimento/archlinux/master/arch-install2.sh
 
-# reflector
+# mirrorlist [download a local mirrorlist]
+
+mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
+
+COUNTRY_CODE="BR"
+curl -o /etc/pacman.d/mirrorlist https://www.archlinux.org/mirrorlist/?country=${COUNTRY_CODE}&protocol=http&protocol=https&ip_version=4
+sed -i-${COUNTRY_CODE}.bak '/Server/s/^#//g' mirrorlist
 
 echo " "
 echo "=======  pacstrap ========"
