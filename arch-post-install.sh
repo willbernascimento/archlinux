@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DESKTOP="gnome gnome-tweaks git neofetch"
+DESKTOP="gnome gnome-tweaks git neofetch gnome-passwordsafe rsync lollypop ttf-fira-sans ttf-fira-mono libreoffice-fresh-pt-br"
 
 TERM_CONF="zsh zsh-autosuggestions zsh-completions vim zsh-syntax-highlighting zsh-history-substring-search zsh-theme-powerlevel10k"
 
@@ -21,7 +21,7 @@ done
 
 # Install other pacman packages
 
-pacman -Syu $INTERNET $PROGRAMMING
+pacman -Syu $INTERNET $PROGRAMMING $TERM_CONF
 
 
 
