@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DESKTOP="gnome gnome-tweaks git neofetch gnome-passwordsafe rsync lollypop ttf-fira-sans ttf-fira-mono libreoffice-fresh-pt-br"
+DESKTOP="gnome gnome-tweaks gnome-software-packagekit-plugin gnome-passwordsafe git neofetch rsync lollypop ttf-fira-sans ttf-fira-mono libreoffice-fresh-pt-br"
 
 TERM_CONF="zsh zsh-autosuggestions zsh-completions vim zsh-syntax-highlighting zsh-history-substring-search zsh-theme-powerlevel10k"
 
