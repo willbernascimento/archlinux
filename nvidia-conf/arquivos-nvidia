@@ -1,0 +1,6 @@
+/etc/modprobe.d/nvidia-drm.conf
+/etc/X11/xorg.conf.d/10-prime-render-offload.conf
+/etc/X11/xorg.conf.d/10-nvidia-drm-outputclass.conf
+
+lspci | grep -E "VGA|3D"
+glxinfo | grep -i vendor
