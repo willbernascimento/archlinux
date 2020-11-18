@@ -1,0 +1,14 @@
+#!/bin/bash
+
+
+# remove os pacotes das nvida
+#pacman -R nvidia nvidia-prime nvidia-settings nvidia-utils
+
+# remove arquivos da NVIDIA
+rm -rf /etc/X11/xorg.conf.d/10*
+
+# restaura o GDM (com wayland)
+
+# faz o mkinit
+
+mkinitcpio -p linux
