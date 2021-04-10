@@ -70,7 +70,7 @@ echo " "
 echo "Neste momento vamos configurar o bootloader"
 
 
-SYSTEM_PACKAGES="grub dosfstools efibootmgr os-prober sudo intel-ucode networkmanager dhcp dhcpcd"
+SYSTEM_PACKAGES="grub dosfstools efibootmgr os-prober sudo intel-ucode libva-intel-driver networkmanager dhcp dhcpcd"
 
 # grub, firmware, sudo
 pacman -S ${SYSTEM_PACKAGES}
