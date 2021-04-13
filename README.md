@@ -7,7 +7,7 @@ Scripts, files and commands for **my** Arch Linux configuration.
 
 To group several configuration files for my setup and an Arch Linux personal installation automation script. I used internet sources mainly [Arch Wiki](https://wiki.archlinux.org/) and [StackOverflow](https://stackoverflow.com/). Whenever I can remember I indicate the source of consultation.
 
-# Configuration Files
+# Devices Configuration Files
 
 ## Disable laptop touchscreen
 
