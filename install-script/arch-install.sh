@@ -1,5 +1,8 @@
 #!/bin/bash
 
+
+# PARTITION SCHEME
+
 # DEVICE=/dev/sda
 # PARTITION_ROOT=/dev/sda3
 # PARTITION_BOOT=/dev/sda1
@@ -8,7 +11,7 @@
 
 echo "Download script install files"
 
-curl -o arch-install2.sh https://raw.githubusercontent.com/willbernascimento/archlinux/master/arch-install2.sh
+curl -o arch-install2.sh https://raw.githubusercontent.com/willbernascimento/archlinux/master/install-script/arch-install2.sh
 
 
 # mirrorlist [download a local mirrorlist]
@@ -42,7 +45,7 @@ echo " "
 
 # pacstrap
 
-PACSTRAP_PKG="base base-devel linux linux-firmware vim"
+PACSTRAP_PKG="base base-devel linux linux-firmware vim btrfs-progs"
 
 
 echo "Além dos pacotes: $PACSTRAP_PKG"
