@@ -6,4 +6,4 @@ INTERNET="skypeforlinux-stable-bin zoom phantomjs google-chrome-beta"
 PROGRAMMING="rstudio-desktop-bin visual-studio-code-bin"
 SYSTEM="aic94xx-firmware wd719x-firmware upd72020x-fw udunits touchegg tesseract tesseract-data-por soci hunspell-pt-br"
 
-yay -S --nocleanmenu --nodiffmenu $INTERNET $PROGRAMMING
+yay -S --nocleanmenu --nodiffmenu $SYSTEM $INTERNET $PROGRAMMING
