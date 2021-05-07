@@ -185,3 +185,10 @@ done
 systemctl enable fstrim.timer
 
 echo "basic installation completed. You can reboot now."
+echo "downloading post install scripts"
+
+cd /home/${USER_NAME}
+
+curl -o arch-post-install-pacman.sh	
+curl -o arch-post-install-yay-conf.sh
+curl -o arch-post-install-yay-packages.sh
