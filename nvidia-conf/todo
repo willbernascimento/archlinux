@@ -1,0 +1,6 @@
+
+1. Remover codigo que desabilita wayland 
+    1.1 tornar opcional com linha de comando
+2. Remover codigo que remove os pacotes Nvidia
+    1.1 tornar opcional a remoção do pacote
+

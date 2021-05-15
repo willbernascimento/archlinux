@@ -1,18 +1,16 @@
+from os import mkdir
+from pathlib import Path
 import subprocess
 import re
 
 # pacotes necessarios (precisa ver como lidar com linux-lts)
 
-#PACOTES_NECESSARIOS = ['nvidia', 'nvidia-prime', 'nvidia-settings', 'nvidia-utils', 'linux']
-
-PACOTES_NECESSARIOS = ['nvidia', 'linux-lts']
-
+PACOTES_NECESSARIOS = ['nvidia', 'nvidia-prime', 'nvidia-settings', 'nvidia-utils', 'linux']
 
 # pacotes instalados
 
 PACOTES_INSTALADOS = subprocess.run("pacman -Qn", check=True, capture_output=True, text=True, shell=True)
 PACOTES_INSTALADOS_OUT = PACOTES_INSTALADOS.stdout.split("\n")
-#print(PACOTES_INSTALADOS_OUT)
 
 pacotes_instalados_sv = []
 
@@ -21,44 +19,47 @@ for i in PACOTES_INSTALADOS_OUT:
 
 
 nao_instalados = []
+
 for i in PACOTES_NECESSARIOS:
     if i not in pacotes_instalados_sv:
         nao_instalados.append(i)
 
 if len(nao_instalados) > 0:
-    print(f'Os pacotes  {nao_instalados} são necessários. Instale-os e tente novamente!')
+    print(f'Os pacotes  {" ".join(nao_instalados)} são necessários. Instale-os e tente novamente!')
+    exit()
 
 
 # Configurando o prime
-# PRIME_RENDER_FILE = '10-prime-render-offloader.conf'
-# XORG_CONF_DIR = '/etc/xorg.conf.d/'
 
-PRIME_RENDER_FILE = 'file_teste'
-XORG_CONF_DIR = 'diretorio_teste/'
+print('Copiando arquivos de configuração \n')
 
-out_copia_prime_rende_file = subprocess.run(f'cp {PRIME_RENDER_FILE}  {XORG_CONF_DIR}', 
-check=True, 
-capture_output=True, 
-text=True, 
-shell=True)
+PRIME_RENDER_FILE = '10-prime-render-offload.conf'
+XORG_CONF_DIR = Path("/etc/xorg.conf.d/")
+
+
+if not XORG_CONF_DIR.exists():
+    mkdir_xorg_conf_dir = subprocess.run(f'sudo mkdir -p {XORG_CONF_DIR}', check=True, capture_output=True, text=True, shell=True)
+
+out_copia_prime_rende_file = subprocess.run(f'sudo cp -r {PRIME_RENDER_FILE} {XORG_CONF_DIR}/{PRIME_RENDER_FILE}', check=True, capture_output=True, text=True, shell=True)
+
+
 
 
 # configurando o gdm (cria mensagem explicando o que acontecendo)
 
-# GDM_CUSTOM_FILE = "custom.conf"
-# GDM_DIR = "/etc/gdm/"
+print('Desabilitando wayland \n')
 
-GDM_CUSTOM_FILE = 'file_teste'
-GDM_DIR = 'diretorio_teste/'
+GDM_CUSTOM_FILE = "custom.conf"
+GDM_DIR = "/etc/gdm/"
 
-out_backup_gdm_custom_file = subprocess.run(f'mv {GDM_DIR}/{GDM_CUSTOM_FILE} {GDM_DIR}/{GDM_CUSTOM_FILE}.prime-bkp', 
+out_backup_gdm_custom_file = subprocess.run(f'sudo cp -r {GDM_DIR}/{GDM_CUSTOM_FILE} {GDM_DIR}/{GDM_CUSTOM_FILE}.prime-bkp', 
                                             check=True, 
                                             capture_output=True, 
                                             text=True, 
                                             shell=True)
 
 
-out_copia_gdm_custom_file = subprocess.run(f'cp {GDM_CUSTOM_FILE} {GDM_DIR}', 
+out_copia_gdm_custom_file = subprocess.run(f'sudo cp -r {GDM_CUSTOM_FILE} {GDM_DIR}', 
                                             check=True, 
                                             capture_output=True, 
                                             text=True, 
@@ -67,8 +68,8 @@ out_copia_gdm_custom_file = subprocess.run(f'cp {GDM_CUSTOM_FILE} {GDM_DIR}',
 
 # xinitrc 
 
-#XINITRC_FILE = "$HOME/.xinitrc"
-XINITRC_FILE = "file_teste"
+XINITRC_FILE = "$HOME/.xinitrc"
+
 status = subprocess.call("test -e '{}'".format(XINITRC_FILE), shell=True)
 
 if status == 0:
@@ -81,6 +82,8 @@ if status == 0:
 
 
 # cria a imagem do kernel (precisa ver como lidar com linux-lts)
+
+print('Criando a imagem com mkinitcpio \n')
 
 KERNEL_INSTALADO = 'linux' #vai la pra cima essa variavel
 
@@ -106,6 +109,11 @@ subprocess.run(f'echo "hybrid-mode" > $HOME/.{STATUS_FILE}',
                                             capture_output=True, 
                                             text=True, 
                                             shell=True) 
+
+
+
+print('Salvando status no arquivo ~/.prime-custom-setup \n')
+print('Processo finalizado, reinicie o computador para usar o prime ...')
 
 # a ideia e testar o status do arquivo. Para idenfificar como proceder
 # na limpeza deles para alterar o estado
